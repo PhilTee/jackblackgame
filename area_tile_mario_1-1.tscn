@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://d23h02wntw52k"]
+
+[ext_resource type="Texture2D" uid="uid://ggwrp25444kg" path="res://mario_tile_1-1.png" id="1_qmvxd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drg75"]
+size = Vector2(80, 80)
+
+[node name="Area2D" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("1_qmvxd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_drg75")

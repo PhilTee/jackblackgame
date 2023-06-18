@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://cgkk161crx4mg"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_eandx"]
+[ext_resource type="Texture2D" uid="uid://d2bplyag1bj81" path="res://Jack Black.png" id="2_do0y2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6arh"]
+atlas = ExtResource("2_do0y2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5a82"]
+atlas = ExtResource("2_do0y2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s58f8"]
+atlas = ExtResource("2_do0y2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d380q"]
+atlas = ExtResource("2_do0y2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvmi4"]
+atlas = ExtResource("2_do0y2")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ibc04"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6arh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5a82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s58f8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d380q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvmi4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6qll6"]
+radius = 12.0
+height = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0qav"]
+size = Vector2(20, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4f0o"]
+size = Vector2(24, 52)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_eandx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_ibc04")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_6qll6")
+
+[node name="StampArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StampArea"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_y0qav")
+
+[node name="InjuryArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InjuryArea"]
+position = Vector2(0, -34)
+shape = SubResource("RectangleShape2D_j4f0o")
+
+[node name="ShootSpot" type="Node2D" parent="."]
+position = Vector2(30, -20)
+
+[connection signal="area_entered" from="StampArea" to="." method="stamp_area_entered"]
+[connection signal="area_entered" from="InjuryArea" to="." method="injury_area_entered"]

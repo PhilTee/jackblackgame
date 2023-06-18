@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://8mwjrvrvfdxk"]
+
+[ext_resource type="Texture2D" uid="uid://ca3fd0tvj6dpq" path="res://Music bullet.png" id="1_sgv8k"]
+[ext_resource type="Script" path="res://bullet.gd" id="1_tx7ti"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2u63"]
+size = Vector2(12, 16)
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_tx7ti")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_sgv8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_p2u63")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+autostart = true
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

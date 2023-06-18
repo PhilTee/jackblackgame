@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://btdbspiforrgj"]
+
+[ext_resource type="PackedScene" uid="uid://cgkk161crx4mg" path="res://player.tscn" id="1_3pk4c"]
+[ext_resource type="PackedScene" uid="uid://d23h02wntw52k" path="res://area_tile_mario_1-1.tscn" id="2_bsuol"]
+
+[node name="Main" type="Node"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_3pk4c")]
+position = Vector2(276, 92)
+
+[node name="Area2D" parent="." instance=ExtResource("2_bsuol")]
+position = Vector2(278, 253)
